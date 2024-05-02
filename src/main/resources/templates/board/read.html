@@ -219,8 +219,11 @@
             replyText:replyText.value,
             replyer:replyer.value}
 
+        console.log("replyObj : " , replyObj)
+
         addReply(replyObj).then(result => {
-            alert(result.rno)
+            // alert(result.rno)
+            alert("댓글 잘 등록되었습니다.")
             registerModal.hide()
             replyText.value = ''
             replyer.value =''

@@ -20,6 +20,8 @@ async function getList({bno, page, size, goLast}){
 
     const result = await axios.get(`/replies/list/${bno}`, {params: {page, size}})
 
+    console.log("getList result : ", result)
+
     if(goLast){
         const total = result.data.total
         const lastPage = parseInt(Math.ceil(total/size))
@@ -34,6 +36,7 @@ async function getList({bno, page, size, goLast}){
 
 async function addReply(replyObj) {
     const response = await axios.post(`/replies/`,replyObj)
+    console.log("response.data",response.data)
     return response.data
 }
 

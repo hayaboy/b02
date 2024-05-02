@@ -28,23 +28,6 @@ public class ReplyController {
 
     private final ReplyService replyService;
 
-//    @ApiOperation(value = "Replies POST", notes = "POST 방식으로 댓글 등록")
-//    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public Map<String,Long> register(
-//            @Valid @RequestBody ReplyDTO replyDTO,
-//            BindingResult bindingResult)throws BindException{
-//
-//        log.info(replyDTO);
-//
-//        if(bindingResult.hasErrors()){
-//            throw new BindException(bindingResult);
-//        }
-//
-//        Map<String, Long> resultMap = new HashMap<>();
-//        resultMap.put("rno",111L);
-//
-//        return resultMap;
-//    }
 
     @ApiOperation(value = "Replies POST", notes = "POST 방식으로 댓글 등록")
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -52,7 +35,7 @@ public class ReplyController {
             @Valid @RequestBody ReplyDTO replyDTO,
             BindingResult bindingResult)throws BindException{
 
-        log.info(replyDTO);
+        log.info("register POST replyDTO : " + replyDTO);
 
         if(bindingResult.hasErrors()){
             throw new BindException(bindingResult);
@@ -61,7 +44,7 @@ public class ReplyController {
         Map<String, Long> resultMap = new HashMap<>();
 
         Long rno = replyService.register(replyDTO);
-
+        log.info("ReplyController register의 rno" + rno);
         resultMap.put("rno",rno);
 
         return resultMap;
@@ -72,6 +55,7 @@ public class ReplyController {
     public PageResponseDTO<ReplyDTO> getList(@PathVariable("bno") Long bno,
                                              PageRequestDTO pageRequestDTO){
 
+        log.info("ReplyController getList bno", bno);
         PageResponseDTO<ReplyDTO> responseDTO = replyService.getListOfBoard(bno, pageRequestDTO);
 
         return responseDTO;
